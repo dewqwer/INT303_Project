@@ -1,3 +1,4 @@
+ALTER DATABASE read2me CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE TABLE address (
     addressid     BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     addressno     VARCHAR(20) NOT NULL,
@@ -11,6 +12,7 @@ CREATE TABLE address (
     
 );
 ALTER TABLE address ADD CONSTRAINT address_pk PRIMARY KEY ( addressid );
+ALTER TABLE address.* CHARACTER SET utf8;
 
 CREATE TABLE book (
     isbn              BIGINT NOT NULL ,

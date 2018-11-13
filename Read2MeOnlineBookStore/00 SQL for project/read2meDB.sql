@@ -42,13 +42,13 @@ CREATE TABLE lineitem (
 );
 ALTER TABLE lineitem ADD CONSTRAINT lineitem_pk PRIMARY KEY ( orderid , isbn );
 
-CREATE TABLE "ORDER" (
+CREATE TABLE "ORDERS" (
     orderid       BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     ordereddate   DATE NOT NULL,
     orderstatus   VARCHAR(30) NOT NULL,
     customerid    BIGINT NOT NULL 
 );
-ALTER TABLE "ORDER" ADD CONSTRAINT order_pk PRIMARY KEY ( orderid );
+ALTER TABLE "ORDERS" ADD CONSTRAINT order_pk PRIMARY KEY ( orderid );
 
 CREATE TABLE payment (
     paymentid    BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
@@ -87,15 +87,15 @@ ALTER TABLE lineitem
 
 ALTER TABLE lineitem
     ADD CONSTRAINT lineitem_order_fk FOREIGN KEY ( orderid )
-        REFERENCES "ORDER" ( orderid );
+        REFERENCES "ORDERS" ( orderid );
 
-ALTER TABLE "ORDER"
+ALTER TABLE "ORDERS"
     ADD CONSTRAINT order_customer_fk FOREIGN KEY ( customerid )
         REFERENCES customer ( customerid );
 
 ALTER TABLE payment
     ADD CONSTRAINT payment_order_fk FOREIGN KEY ( orderid )
-        REFERENCES "ORDER" ( orderid );
+        REFERENCES "ORDERS" ( orderid );
 
 ALTER TABLE productreview
     ADD CONSTRAINT productreview_book_fk FOREIGN KEY ( isbn )
@@ -111,7 +111,7 @@ ALTER TABLE shipping
 
 ALTER TABLE shipping
     ADD CONSTRAINT shipping_order_fk FOREIGN KEY ( orderid )
-        REFERENCES "ORDER" ( orderid );
+        REFERENCES "ORDERS" ( orderid );
 
 
 

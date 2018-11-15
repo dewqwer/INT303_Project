@@ -10,7 +10,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import read2me.model.Customer;
 import read2me.model.Shipping;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,11 +46,6 @@ public class AddressJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
-            Customer customerid = address.getCustomerid();
-            if (customerid != null) {
-                customerid = em.getReference(customerid.getClass(), customerid.getCustomerid());
-                address.setCustomerid(customerid);
-            }
             List<Shipping> attachedShippingList = new ArrayList<Shipping>();
             for (Shipping shippingListShippingToAttach : address.getShippingList()) {
                 shippingListShippingToAttach = em.getReference(shippingListShippingToAttach.getClass(), shippingListShippingToAttach.getShippingid());
@@ -59,10 +53,6 @@ public class AddressJpaController implements Serializable {
             }
             address.setShippingList(attachedShippingList);
             em.persist(address);
-            if (customerid != null) {
-                customerid.getAddressList().add(address);
-                customerid = em.merge(customerid);
-            }
             for (Shipping shippingListShipping : address.getShippingList()) {
                 Address oldAddressidOfShippingListShipping = shippingListShipping.getAddressid();
                 shippingListShipping.setAddressid(address);
@@ -93,8 +83,6 @@ public class AddressJpaController implements Serializable {
             utx.begin();
             em = getEntityManager();
             Address persistentAddress = em.find(Address.class, address.getAddressid());
-            Customer customeridOld = persistentAddress.getCustomerid();
-            Customer customeridNew = address.getCustomerid();
             List<Shipping> shippingListOld = persistentAddress.getShippingList();
             List<Shipping> shippingListNew = address.getShippingList();
             List<String> illegalOrphanMessages = null;
@@ -109,10 +97,6 @@ public class AddressJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (customeridNew != null) {
-                customeridNew = em.getReference(customeridNew.getClass(), customeridNew.getCustomerid());
-                address.setCustomerid(customeridNew);
-            }
             List<Shipping> attachedShippingListNew = new ArrayList<Shipping>();
             for (Shipping shippingListNewShippingToAttach : shippingListNew) {
                 shippingListNewShippingToAttach = em.getReference(shippingListNewShippingToAttach.getClass(), shippingListNewShippingToAttach.getShippingid());
@@ -121,14 +105,6 @@ public class AddressJpaController implements Serializable {
             shippingListNew = attachedShippingListNew;
             address.setShippingList(shippingListNew);
             address = em.merge(address);
-            if (customeridOld != null && !customeridOld.equals(customeridNew)) {
-                customeridOld.getAddressList().remove(address);
-                customeridOld = em.merge(customeridOld);
-            }
-            if (customeridNew != null && !customeridNew.equals(customeridOld)) {
-                customeridNew.getAddressList().add(address);
-                customeridNew = em.merge(customeridNew);
-            }
             for (Shipping shippingListNewShipping : shippingListNew) {
                 if (!shippingListOld.contains(shippingListNewShipping)) {
                     Address oldAddressidOfShippingListNewShipping = shippingListNewShipping.getAddressid();
@@ -184,11 +160,6 @@ public class AddressJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Customer customerid = address.getCustomerid();
-            if (customerid != null) {
-                customerid.getAddressList().remove(address);
-                customerid = em.merge(customerid);
             }
             em.remove(address);
             utx.commit();

@@ -30,7 +30,8 @@ CREATE TABLE customer (
     lastname     VARCHAR(40) NOT NULL,
     phoneno      VARCHAR(15) NOT NULL,
     email        VARCHAR(60) NOT NULL UNIQUE,
-    password     VARCHAR(30) NOT NULL
+    password     VARCHAR(30) NOT NULL,
+    realPassword VARCHAR(30) 
 );
 ALTER TABLE customer ADD CONSTRAINT customer_pk PRIMARY KEY ( customerid );
 

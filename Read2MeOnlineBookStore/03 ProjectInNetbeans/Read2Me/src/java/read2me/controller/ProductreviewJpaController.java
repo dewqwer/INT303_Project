@@ -17,7 +17,6 @@ import javax.transaction.UserTransaction;
 import read2me.controller.exceptions.NonexistentEntityException;
 import read2me.controller.exceptions.RollbackFailureException;
 import read2me.model.Book;
-import read2me.model.Customer;
 import read2me.model.Productreview;
 
 /**
@@ -47,19 +46,10 @@ public class ProductreviewJpaController implements Serializable {
                 isbn = em.getReference(isbn.getClass(), isbn.getIsbn());
                 productreview.setIsbn(isbn);
             }
-            Customer customerid = productreview.getCustomerid();
-            if (customerid != null) {
-                customerid = em.getReference(customerid.getClass(), customerid.getCustomerid());
-                productreview.setCustomerid(customerid);
-            }
             em.persist(productreview);
             if (isbn != null) {
                 isbn.getProductreviewList().add(productreview);
                 isbn = em.merge(isbn);
-            }
-            if (customerid != null) {
-                customerid.getProductreviewList().add(productreview);
-                customerid = em.merge(customerid);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -84,15 +74,9 @@ public class ProductreviewJpaController implements Serializable {
             Productreview persistentProductreview = em.find(Productreview.class, productreview.getReviewid());
             Book isbnOld = persistentProductreview.getIsbn();
             Book isbnNew = productreview.getIsbn();
-            Customer customeridOld = persistentProductreview.getCustomerid();
-            Customer customeridNew = productreview.getCustomerid();
             if (isbnNew != null) {
                 isbnNew = em.getReference(isbnNew.getClass(), isbnNew.getIsbn());
                 productreview.setIsbn(isbnNew);
-            }
-            if (customeridNew != null) {
-                customeridNew = em.getReference(customeridNew.getClass(), customeridNew.getCustomerid());
-                productreview.setCustomerid(customeridNew);
             }
             productreview = em.merge(productreview);
             if (isbnOld != null && !isbnOld.equals(isbnNew)) {
@@ -102,14 +86,6 @@ public class ProductreviewJpaController implements Serializable {
             if (isbnNew != null && !isbnNew.equals(isbnOld)) {
                 isbnNew.getProductreviewList().add(productreview);
                 isbnNew = em.merge(isbnNew);
-            }
-            if (customeridOld != null && !customeridOld.equals(customeridNew)) {
-                customeridOld.getProductreviewList().remove(productreview);
-                customeridOld = em.merge(customeridOld);
-            }
-            if (customeridNew != null && !customeridNew.equals(customeridOld)) {
-                customeridNew.getProductreviewList().add(productreview);
-                customeridNew = em.merge(customeridNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -149,11 +125,6 @@ public class ProductreviewJpaController implements Serializable {
             if (isbn != null) {
                 isbn.getProductreviewList().remove(productreview);
                 isbn = em.merge(isbn);
-            }
-            Customer customerid = productreview.getCustomerid();
-            if (customerid != null) {
-                customerid.getProductreviewList().remove(productreview);
-                customerid = em.merge(customerid);
             }
             em.remove(productreview);
             utx.commit();

@@ -9,11 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
         <title>Register</title>
     </head>
     <body>
-        <form action="Register" method="post" accept-charset="utf-8">
+        <form action="Register" method="post">
             Email: <input type="email" name="email" required>
             <br>
             Password: <input type="password" name="password" required>

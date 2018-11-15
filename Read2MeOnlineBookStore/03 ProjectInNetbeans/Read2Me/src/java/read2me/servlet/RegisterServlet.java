@@ -85,6 +85,10 @@ public class RegisterServlet extends HttpServlet {
             customer.setPassword(passwordEncrypt);
             customer.setPhoneno(phone);
 
+//----------เพิ่มให้เห็นว่า password อะไร จะได้ใช้ในการ test เข้าระบบ----- 
+            customer.setRealpassword(password);
+//-------------------------------------------------------------            
+
             CustomerJpaController customerJpaController = new CustomerJpaController(utx, emf);
             customerJpaController.create(customer);
 

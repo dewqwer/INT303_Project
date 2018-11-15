@@ -11,7 +11,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import read2me.model.Payment;
-import read2me.model.Customer;
 import read2me.model.Shipping;
 import read2me.model.Lineitem;
 import java.util.ArrayList;
@@ -54,11 +53,6 @@ public class OrdersJpaController implements Serializable {
                 payment = em.getReference(payment.getClass(), payment.getPaymentid());
                 orders.setPayment(payment);
             }
-            Customer customerid = orders.getCustomerid();
-            if (customerid != null) {
-                customerid = em.getReference(customerid.getClass(), customerid.getCustomerid());
-                orders.setCustomerid(customerid);
-            }
             Shipping shipping = orders.getShipping();
             if (shipping != null) {
                 shipping = em.getReference(shipping.getClass(), shipping.getShippingid());
@@ -79,10 +73,6 @@ public class OrdersJpaController implements Serializable {
                 }
                 payment.setOrderid(orders);
                 payment = em.merge(payment);
-            }
-            if (customerid != null) {
-                customerid.getOrdersList().add(orders);
-                customerid = em.merge(customerid);
             }
             if (shipping != null) {
                 Orders oldOrderidOfShipping = shipping.getOrderid();
@@ -125,8 +115,6 @@ public class OrdersJpaController implements Serializable {
             Orders persistentOrders = em.find(Orders.class, orders.getOrderid());
             Payment paymentOld = persistentOrders.getPayment();
             Payment paymentNew = orders.getPayment();
-            Customer customeridOld = persistentOrders.getCustomerid();
-            Customer customeridNew = orders.getCustomerid();
             Shipping shippingOld = persistentOrders.getShipping();
             Shipping shippingNew = orders.getShipping();
             List<Lineitem> lineitemListOld = persistentOrders.getLineitemList();
@@ -159,10 +147,6 @@ public class OrdersJpaController implements Serializable {
                 paymentNew = em.getReference(paymentNew.getClass(), paymentNew.getPaymentid());
                 orders.setPayment(paymentNew);
             }
-            if (customeridNew != null) {
-                customeridNew = em.getReference(customeridNew.getClass(), customeridNew.getCustomerid());
-                orders.setCustomerid(customeridNew);
-            }
             if (shippingNew != null) {
                 shippingNew = em.getReference(shippingNew.getClass(), shippingNew.getShippingid());
                 orders.setShipping(shippingNew);
@@ -183,14 +167,6 @@ public class OrdersJpaController implements Serializable {
                 }
                 paymentNew.setOrderid(orders);
                 paymentNew = em.merge(paymentNew);
-            }
-            if (customeridOld != null && !customeridOld.equals(customeridNew)) {
-                customeridOld.getOrdersList().remove(orders);
-                customeridOld = em.merge(customeridOld);
-            }
-            if (customeridNew != null && !customeridNew.equals(customeridOld)) {
-                customeridNew.getOrdersList().add(orders);
-                customeridNew = em.merge(customeridNew);
             }
             if (shippingNew != null && !shippingNew.equals(shippingOld)) {
                 Orders oldOrderidOfShipping = shippingNew.getOrderid();
@@ -270,11 +246,6 @@ public class OrdersJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Customer customerid = orders.getCustomerid();
-            if (customerid != null) {
-                customerid.getOrdersList().remove(orders);
-                customerid = em.merge(customerid);
             }
             em.remove(orders);
             utx.commit();

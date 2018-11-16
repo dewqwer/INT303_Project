@@ -12,8 +12,10 @@
         <title>Register</title>
     </head>
     <body>
-        <form action="Register" method="post">
+        <form action="Register" method="post" accept-charset="UTF-8">
+            <br>
             Email: <input type="email" name="email" required>
+            <p style="color:red">${message}</p>
             <br>
             Password: <input type="password" name="password" required>
             <br>
@@ -23,7 +25,7 @@
             <br>
             Phone :<input type="tel" name="phone" required>
             <br>
-            
+
             Address:
             <br>
             Address No: <input type="text" name="addressNo" required>

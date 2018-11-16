@@ -11,4 +11,5 @@
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/read2me" object-type="user" pool-name="derby_net_read2me_appPool"/>
+    <jdbc-resource enabled="true" jndi-name="java:app/read2menovel" object-type="user" pool-name="derby_net_read2me_appPool"/>
 </resources>

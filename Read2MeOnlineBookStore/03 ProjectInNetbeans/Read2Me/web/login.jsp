@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="container">
-            <form action="Login" method="post">
+            <form action="Login" method="post" accept-charset="UTF-8">
             <table class="table">
                 <tr>
                     <td>Email:</td>

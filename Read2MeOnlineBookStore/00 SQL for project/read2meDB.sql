@@ -1,12 +1,12 @@
 CREATE TABLE address (
     addressid     BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    addressno     VARCHAR(20) NOT NULL,
-    street        VARCHAR(40) NOT NULL,
-    alley         VARCHAR(40) NOT NULL,
-    subdistrict   VARCHAR(40) NOT NULL,
-    district      VARCHAR(40) NOT NULL,
-    province      VARCHAR(40) NOT NULL,
-    postcode      VARCHAR(20) NOT NULL,
+    addressno     VARCHAR(200) NOT NULL,
+    street        VARCHAR(200) NOT NULL,
+    alley         VARCHAR(200) NOT NULL,
+    subdistrict   VARCHAR(200) NOT NULL,
+    district      VARCHAR(200) NOT NULL,
+    province      VARCHAR(200) NOT NULL,
+    postcode      VARCHAR(200) NOT NULL,
     customerid    BIGINT NOT NULL
     
 );
@@ -14,24 +14,24 @@ ALTER TABLE address ADD CONSTRAINT address_pk PRIMARY KEY ( addressid );
 
 CREATE TABLE book (
     isbn              BIGINT NOT NULL ,
-    title             VARCHAR(40) NOT NULL UNIQUE,
-    author            VARCHAR(40) NOT NULL,
-    description       VARCHAR(100) NOT NULL,
-    publisher         VARCHAR(40) NOT NULL,
-    category          VARCHAR(100) NOT NULL,
+    title             VARCHAR(200) NOT NULL UNIQUE,
+    author            VARCHAR(200) NOT NULL,
+    description       VARCHAR(200) NOT NULL,
+    publisher         VARCHAR(200) NOT NULL,
+    category          VARCHAR(200) NOT NULL,
     unitpriceperone   BIGINT NOT NULL,
-    salegroup         VARCHAR(60)
+    salegroup         VARCHAR(200)
 );
 ALTER TABLE book ADD CONSTRAINT book_pk PRIMARY KEY ( isbn );
 
 CREATE TABLE customer (
     customerid   BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    firstname    VARCHAR(40) NOT NULL,
-    lastname     VARCHAR(40) NOT NULL,
-    phoneno      VARCHAR(15) NOT NULL,
-    email        VARCHAR(60) NOT NULL UNIQUE,
-    password     VARCHAR(30) NOT NULL,
-    realPassword VARCHAR(30) 
+    firstname    VARCHAR(200) NOT NULL,
+    lastname     VARCHAR(200) NOT NULL,
+    phoneno      VARCHAR(200) NOT NULL,
+    email        VARCHAR(200) NOT NULL UNIQUE,
+    password     VARCHAR(200) NOT NULL,
+    realPassword VARCHAR(200) 
 );
 ALTER TABLE customer ADD CONSTRAINT customer_pk PRIMARY KEY ( customerid );
 
@@ -46,14 +46,14 @@ ALTER TABLE lineitem ADD CONSTRAINT lineitem_pk PRIMARY KEY ( orderid , isbn );
 CREATE TABLE "ORDERS" (
     orderid       BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     ordereddate   DATE NOT NULL,
-    orderstatus   VARCHAR(30) NOT NULL,
+    orderstatus   VARCHAR(200) NOT NULL,
     customerid    BIGINT NOT NULL 
 );
 ALTER TABLE "ORDERS" ADD CONSTRAINT order_pk PRIMARY KEY ( orderid );
 
 CREATE TABLE payment (
     paymentid    BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    "method"     VARCHAR(30) NOT NULL,
+    "method"     VARCHAR(200) NOT NULL,
     totalprice   BIGINT NOT NULL,
     orderid      BIGINT NOT NULL UNIQUE
 );
@@ -61,7 +61,7 @@ ALTER TABLE payment ADD CONSTRAINT payment_pk PRIMARY KEY ( paymentid );
 
 CREATE TABLE productreview (
     reviewid    BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    comment     VARCHAR(50),
+    comment     VARCHAR(200),
     rating      INTEGER NOT NULL,
     isbn        BIGINT NOT NULL,
     customerid    BIGINT NOT NULL
@@ -72,7 +72,7 @@ CREATE TABLE shipping (
     shippingid     BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     shippingcost   INTEGER NOT NULL,
     shippingdate   DATE NOT NULL,
-    status         VARCHAR(30) NOT NULL,
+    status         VARCHAR(200) NOT NULL,
     orderid        BIGINT NOT NULL UNIQUE ,
     addressid      BIGINT NOT NULL
 );

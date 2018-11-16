@@ -68,6 +68,12 @@ public class Lineitem implements Serializable {
         this.lineitemPK = new LineitemPK(orderid, isbn);
     }
 
+    public Lineitem(Book b) {
+        this.book=b;
+        this.quantity=1;
+        this.totalpricelineitem = b.getUnitpriceperone();
+    }
+
     public LineitemPK getLineitemPK() {
         return lineitemPK;
     }
@@ -85,7 +91,7 @@ public class Lineitem implements Serializable {
     }
 
     public long getTotalpricelineitem() {
-        return totalpricelineitem;
+        return totalpricelineitem*this.quantity;
     }
 
     public void setTotalpricelineitem(long totalpricelineitem) {

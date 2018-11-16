@@ -4,6 +4,7 @@
     Author     : User
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,8 +16,8 @@
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     </head>
     <body>
-         <div class="container">
-            <jsp:include page="include/Header.jsp?title=Product Listing::"/>
+        <div class="container">
+            <jsp:include page="include/Header.jsp?title=Book Listing::"/>
 
 
             <table id="example" class="table">
@@ -31,22 +32,18 @@
                 </thead>
                 <c:forEach items="${books}" var="b" varStatus="vs">
                     <tr>
-                        <td><img src="model-images/${p.productcode}.jpg" width="120"></td>
+                        <td><img src="NovelImg/${b.isbn}.jpg" width="120"></td>
                         <td>${vs.count}</td>
                         <td>${b.title}</td>
                         <td>${b.author}</td>
                         <td>${b.unitpriceperone}</td>
                         <td>
-                            <!--                            <form action="AddItemToCart" method="post">
-                                                            <input type="hidden" value="${p.productcode}" name="productCode"/>
-                                                            <input type="submit" value="Add to Cart"/>
-                                                        </form>-->
-                            <a href="AddItemToCart?productCode=${b.isnb}">
+                            <a href="AddItemToCart?isbn=${b.isbn}">
                                 <input type="button" value="Add to cart"/>
                             </a>
                         </td>
                         <td>
-                            <a href="RemoveToCart?productCode=${b.isnb}">
+                            <a href="RemoveToCart?isbn=${b.isbn}">
                                 <input type="button" value="Remove to cart"/>
                             </a>
                         </td>

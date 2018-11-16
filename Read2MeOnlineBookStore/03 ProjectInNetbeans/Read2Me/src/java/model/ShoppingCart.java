@@ -32,7 +32,7 @@ public class ShoppingCart implements Serializable{
     //สร้างเงื่อนไข check ว่าเคยมีของอยู่หรือเปล่า 
     //-ถ้าไม่มีจะเป็น null ให้ทำการเพิ่มสินค้าเข้าไป แต่ถ้ามีอยู่แล้วให้ทำการเพิ่มจำนวนของสินค้านั้น      
         if(line == null){
-            cart.put(""+b.getIsbn(),new Lineitem());
+            cart.put(""+b.getIsbn(),new Lineitem(b));
         }else{
             line.setQuantity(line.getQuantity()+1);
         }

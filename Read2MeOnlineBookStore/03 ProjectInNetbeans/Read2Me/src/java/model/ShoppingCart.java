@@ -27,12 +27,12 @@ public class ShoppingCart implements Serializable{
     }
     
     public void add(Book b){
-        Lineitem line=cart.get(""+b.getIsbn());
+        Lineitem line=cart.get(b.getIsbn());
     
     //สร้างเงื่อนไข check ว่าเคยมีของอยู่หรือเปล่า 
     //-ถ้าไม่มีจะเป็น null ให้ทำการเพิ่มสินค้าเข้าไป แต่ถ้ามีอยู่แล้วให้ทำการเพิ่มจำนวนของสินค้านั้น      
         if(line == null){
-            cart.put(""+b.getIsbn(),new Lineitem(b));
+            cart.put(b.getIsbn(),new Lineitem(b));
         }else{
             line.setQuantity(line.getQuantity()+1);
         }
@@ -46,16 +46,16 @@ public class ShoppingCart implements Serializable{
         cart.remove(productCode);
     }
     
-    public double getTotalPrice(){
-        double sum=0;
+    public float getTotalPrice(){
+        float sum=0;
         Collection<Lineitem> lineItems = cart.values();
         for(Lineitem lineItem:lineItems){
-            sum+=lineItem.getTotalpricelineitem();
+            sum+=lineItem.getTotalPrice();
         }
         return sum;
     }
     
-    public double getTotalQuantiry(){
+    public int getTotalQuantiry(){
         int sum=0;
         Collection<Lineitem> lineItems = cart.values();
         for(Lineitem lineItem:lineItems){

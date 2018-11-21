@@ -52,26 +52,12 @@ public class RegisterServlet extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String phone = request.getParameter("phone");
-        String addressNo = request.getParameter("addressNo");
-        String street = request.getParameter("street");
-        String alley = request.getParameter("alley");
-        String subdistrict = request.getParameter("subdistrict");
-        String district = request.getParameter("district");
-        String province = request.getParameter("province");
-        String postcode = request.getParameter("postcode");
 
         if (email != null && email.trim().length() > 0
                 && password != null && password.trim().length() > 0
                 && firstName != null && firstName.trim().length() > 0
                 && lastName != null && lastName.trim().length() > 0
-                && phone != null && phone.trim().length() > 0
-                && addressNo != null && addressNo.trim().length() > 0
-                && street != null && street.trim().length() > 0
-                && alley != null && alley.trim().length() > 0
-                && subdistrict != null && subdistrict.trim().length() > 0
-                && district != null && district.trim().length() > 0
-                && province != null && province.trim().length() > 0
-                && postcode != null && postcode.trim().length() > 0) {
+                && phone != null && phone.trim().length() > 0) {
 
             String passwordEncrypt = cryptWithMD5(password);
 
@@ -99,19 +85,6 @@ public class RegisterServlet extends HttpServlet {
             }
 
             customerJpaController.create(customer);
-
-            Address address = new Address();
-            address.setAddressno(addressNo);
-            address.setAlley(alley);
-            address.setDistrict(district);
-            address.setPostcode(postcode);
-            address.setProvince(province);
-            address.setStreet(street);
-            address.setSubdistrict(subdistrict);
-            address.setCustomerid(customer);
-
-            AddressJpaController addressJpaController = new AddressJpaController(utx, emf);
-            addressJpaController.create(address);
             getServletContext().getRequestDispatcher("/index.html").forward(request, response);
             return;
 

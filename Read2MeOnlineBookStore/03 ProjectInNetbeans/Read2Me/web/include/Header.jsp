@@ -8,7 +8,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-1">
-            <a href="index.html" title="Back to Home"><img src="logo.jpg" width="80"/></a>
+            <a href="index.html" title="Back to Home"><img src="images/header/logo.jpg" width="80"/></a>
         </div>
         <div class="col-sm-3">
             <h4> <br>${param.title}</h4>

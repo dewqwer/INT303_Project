@@ -5,10 +5,6 @@
  */
 package jpa.controller;
 
-import jpa.controller.exceptions.IllegalOrphanException;
-import jpa.controller.exceptions.NonexistentEntityException;
-import jpa.controller.exceptions.PreexistingEntityException;
-import jpa.controller.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -20,6 +16,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import jpa.controller.exceptions.IllegalOrphanException;
+import jpa.controller.exceptions.NonexistentEntityException;
+import jpa.controller.exceptions.PreexistingEntityException;
+import jpa.controller.exceptions.RollbackFailureException;
 import jpa.model.Book;
 import jpa.model.Lineitem;
 
@@ -176,7 +176,7 @@ public class BookJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = book.getIsbn();
+                String id = book.getIsbn();
                 if (findBook(id) == null) {
                     throw new NonexistentEntityException("The book with id " + id + " no longer exists.");
                 }
@@ -189,7 +189,7 @@ public class BookJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
@@ -259,7 +259,7 @@ public class BookJpaController implements Serializable {
         }
     }
 
-    public Book findBook(Long id) {
+    public Book findBook(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Book.class, id);

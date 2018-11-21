@@ -49,7 +49,7 @@ public class Shipping implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "SHIPPINGCOST")
-    private int shippingcost;
+    private double shippingcost;
     @Basic(optional = false)
     @NotNull
     @Column(name = "SHIPPINGDATE")
@@ -74,7 +74,7 @@ public class Shipping implements Serializable {
         this.shippingid = shippingid;
     }
 
-    public Shipping(Long shippingid, int shippingcost, Date shippingdate, String status) {
+    public Shipping(Long shippingid, double shippingcost, Date shippingdate, String status) {
         this.shippingid = shippingid;
         this.shippingcost = shippingcost;
         this.shippingdate = shippingdate;
@@ -89,11 +89,11 @@ public class Shipping implements Serializable {
         this.shippingid = shippingid;
     }
 
-    public int getShippingcost() {
+    public double getShippingcost() {
         return shippingcost;
     }
 
-    public void setShippingcost(int shippingcost) {
+    public void setShippingcost(double shippingcost) {
         this.shippingcost = shippingcost;
     }
 
@@ -151,7 +151,7 @@ public class Shipping implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Shipping[ shippingid=" + shippingid + " ]";
+        return "jpa.model.Shipping[ shippingid=" + shippingid + " ]";
     }
     
 }

@@ -10,6 +10,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -24,13 +25,14 @@ public class LineitemPK implements Serializable {
     private long orderid;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "ISBN")
-    private long isbn;
+    private String isbn;
 
     public LineitemPK() {
     }
 
-    public LineitemPK(long orderid, long isbn) {
+    public LineitemPK(long orderid, String isbn) {
         this.orderid = orderid;
         this.isbn = isbn;
     }
@@ -43,11 +45,11 @@ public class LineitemPK implements Serializable {
         this.orderid = orderid;
     }
 
-    public long getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(long isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -55,7 +57,7 @@ public class LineitemPK implements Serializable {
     public int hashCode() {
         int hash = 0;
         hash += (int) orderid;
-        hash += (int) isbn;
+        hash += (isbn != null ? isbn.hashCode() : 0);
         return hash;
     }
 
@@ -69,7 +71,7 @@ public class LineitemPK implements Serializable {
         if (this.orderid != other.orderid) {
             return false;
         }
-        if (this.isbn != other.isbn) {
+        if ((this.isbn == null && other.isbn != null) || (this.isbn != null && !this.isbn.equals(other.isbn))) {
             return false;
         }
         return true;
@@ -77,7 +79,7 @@ public class LineitemPK implements Serializable {
 
     @Override
     public String toString() {
-        return "model.LineitemPK[ orderid=" + orderid + ", isbn=" + isbn + " ]";
+        return "jpa.model.LineitemPK[ orderid=" + orderid + ", isbn=" + isbn + " ]";
     }
     
 }

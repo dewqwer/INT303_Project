@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Book.findByDescription", query = "SELECT b FROM Book b WHERE b.description = :description")
     , @NamedQuery(name = "Book.findByPublisher", query = "SELECT b FROM Book b WHERE b.publisher = :publisher")
     , @NamedQuery(name = "Book.findByCategory", query = "SELECT b FROM Book b WHERE b.category = :category")
-    , @NamedQuery(name = "Book.findByUnitpriceperone", query = "SELECT b FROM Book b WHERE b.unitpriceperone = :unitpriceperone")
+    , @NamedQuery(name = "Book.findByUnitprice", query = "SELECT b FROM Book b WHERE b.unitprice = :unitprice")
     , @NamedQuery(name = "Book.findBySalegroup", query = "SELECT b FROM Book b WHERE b.salegroup = :salegroup")})
 public class Book implements Serializable {
 
@@ -44,8 +44,9 @@ public class Book implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "ISBN")
-    private Long isbn;
+    private String isbn;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -58,7 +59,7 @@ public class Book implements Serializable {
     private String author;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 200)
+    @Size(min = 1, max = 2000)
     @Column(name = "DESCRIPTION")
     private String description;
     @Basic(optional = false)
@@ -73,8 +74,8 @@ public class Book implements Serializable {
     private String category;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "UNITPRICEPERONE")
-    private long unitpriceperone;
+    @Column(name = "UNITPRICE")
+    private double unitprice;
     @Size(max = 200)
     @Column(name = "SALEGROUP")
     private String salegroup;
@@ -86,25 +87,25 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(Long isbn) {
+    public Book(String isbn) {
         this.isbn = isbn;
     }
 
-    public Book(Long isbn, String title, String author, String description, String publisher, String category, long unitpriceperone) {
+    public Book(String isbn, String title, String author, String description, String publisher, String category, double unitprice) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.description = description;
         this.publisher = publisher;
         this.category = category;
-        this.unitpriceperone = unitpriceperone;
+        this.unitprice = unitprice;
     }
 
-    public Long getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Long isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -148,12 +149,12 @@ public class Book implements Serializable {
         this.category = category;
     }
 
-    public long getUnitpriceperone() {
-        return unitpriceperone;
+    public double getUnitprice() {
+        return unitprice;
     }
 
-    public void setUnitpriceperone(long unitpriceperone) {
-        this.unitpriceperone = unitpriceperone;
+    public void setUnitprice(double unitprice) {
+        this.unitprice = unitprice;
     }
 
     public String getSalegroup() {
@@ -204,7 +205,7 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Book[ isbn=" + isbn + " ]";
+        return "jpa.model.Book[ isbn=" + isbn + " ]";
     }
     
 }

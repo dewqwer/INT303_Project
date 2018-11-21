@@ -129,7 +129,7 @@ public class Productreview implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Productreview[ reviewid=" + reviewid + " ]";
+        return "jpa.model.Productreview[ reviewid=" + reviewid + " ]";
     }
     
 }

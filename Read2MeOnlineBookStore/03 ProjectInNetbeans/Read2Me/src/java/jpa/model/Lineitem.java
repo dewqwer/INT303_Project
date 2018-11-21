@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Lineitem.findAll", query = "SELECT l FROM Lineitem l")
     , @NamedQuery(name = "Lineitem.findByQuantity", query = "SELECT l FROM Lineitem l WHERE l.quantity = :quantity")
-    , @NamedQuery(name = "Lineitem.findByTotalpricelineitem", query = "SELECT l FROM Lineitem l WHERE l.totalpricelineitem = :totalpricelineitem")
+    , @NamedQuery(name = "Lineitem.findByUnitprice", query = "SELECT l FROM Lineitem l WHERE l.unitprice = :unitprice")
     , @NamedQuery(name = "Lineitem.findByOrderid", query = "SELECT l FROM Lineitem l WHERE l.lineitemPK.orderid = :orderid")
     , @NamedQuery(name = "Lineitem.findByIsbn", query = "SELECT l FROM Lineitem l WHERE l.lineitemPK.isbn = :isbn")})
 public class Lineitem implements Serializable {
@@ -42,8 +42,8 @@ public class Lineitem implements Serializable {
     private int quantity;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TOTALPRICELINEITEM")
-    private long totalpricelineitem;
+    @Column(name = "UNITPRICE")
+    private double unitprice;
     @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Book book;
@@ -58,21 +58,23 @@ public class Lineitem implements Serializable {
         this.lineitemPK = lineitemPK;
     }
 
-    public Lineitem(LineitemPK lineitemPK, int quantity, long totalpricelineitem) {
+    public Lineitem(LineitemPK lineitemPK, int quantity, double unitprice) {
         this.lineitemPK = lineitemPK;
         this.quantity = quantity;
-        this.totalpricelineitem = totalpricelineitem;
+        this.unitprice = unitprice;
     }
 
-    public Lineitem(long orderid, long isbn) {
+    public Lineitem(long orderid, String isbn) {
         this.lineitemPK = new LineitemPK(orderid, isbn);
     }
 
+//--Add by myself--    
     public Lineitem(Book b) {
         this.book=b;
         this.quantity=1;
-        this.totalpricelineitem = b.getUnitpriceperone();
+        this.unitprice= b.getUnitprice();
     }
+//-------------------------------------------
 
     public LineitemPK getLineitemPK() {
         return lineitemPK;
@@ -90,12 +92,18 @@ public class Lineitem implements Serializable {
         this.quantity = quantity;
     }
 
-    public long getTotalpricelineitem() {
-        return totalpricelineitem*this.quantity;
+    public double getUnitprice() {
+        return unitprice;
     }
+    
+//--Add by myself--    
+    public double getTotalPrice() {
+        return this.quantity*this.unitprice;
+    }
+//-------------------------------------------
 
-    public void setTotalpricelineitem(long totalpricelineitem) {
-        this.totalpricelineitem = totalpricelineitem;
+    public void setUnitprice(double unitprice) {
+        this.unitprice = unitprice;
     }
 
     public Book getBook() {
@@ -136,7 +144,7 @@ public class Lineitem implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Lineitem[ lineitemPK=" + lineitemPK + " ]";
+        return "jpa.model.Lineitem[ lineitemPK=" + lineitemPK + " ]";
     }
     
 }

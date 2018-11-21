@@ -50,13 +50,11 @@ public class AddItemToCartServlet extends HttpServlet {
             session.setAttribute("cart", cart);
         }
         
-        String isbnStr =request.getParameter("isbn");
+        String isbn =request.getParameter("isbn");
         
         BookJpaController bookJpaController=new BookJpaController(utx, emf);
-        Long isbn=Long.parseLong(isbnStr);
         Book b=bookJpaController.findBook(isbn);
         cart.add(b);
-//        getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
         response.sendRedirect("BookList");
     }
 

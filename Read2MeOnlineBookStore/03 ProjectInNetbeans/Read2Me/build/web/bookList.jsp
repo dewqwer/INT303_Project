@@ -32,11 +32,12 @@
                 </thead>
                 <c:forEach items="${books}" var="b" varStatus="vs">
                     <tr>
-                        <td><img src="NovelImg/${b.isbn}.jpg" width="120"></td>
+                        <td><img src="images/novel/${b.isbn}.jpg" width="120"></td>
                         <td>${vs.count}</td>
                         <td>${b.title}</td>
                         <td>${b.author}</td>
-                        <td>${b.unitpriceperone}</td>
+                        <td>${b.unitprice}</td>
+                        
                         <td>
                             <a href="AddItemToCart?isbn=${b.isbn}">
                                 <input type="button" value="Add to cart"/>

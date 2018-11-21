@@ -161,7 +161,7 @@ public class Orders implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Orders[ orderid=" + orderid + " ]";
+        return "jpa.model.Orders[ orderid=" + orderid + " ]";
     }
     
 }

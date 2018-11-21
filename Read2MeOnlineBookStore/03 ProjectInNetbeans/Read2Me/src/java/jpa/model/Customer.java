@@ -204,7 +204,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Customer[ customerid=" + customerid + " ]";
+        return "jpa.model.Customer[ customerid=" + customerid + " ]";
     }
     
 }

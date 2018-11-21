@@ -12,13 +12,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="include/Header.jsp?title=Book Listing::"/>
-       
+        <jsp:include page="include/Header.jsp"/>
+
         <a href="Register">Register</a>
-        <a href="Login">Login</a>
-        <a href="NewServlet">BookDetail</a>
-        <a href="BookList">BookList</a>
-        <a href="OrdersDetails">OrdersDetails</a>
-        <a href="Payment">Payment</a>
+                <a href="Login">Login</a>
+                <a href="BookDetail">BookDetail</a>
+                <a href="BookList">BookList</a>
+                <a href="OrdersDetails">OrdersDetails</a>
+                <a href="Checkout">Checkout</a>
+
+        
+
+
+
+
     </body>
 </html>

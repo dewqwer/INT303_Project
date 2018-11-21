@@ -49,7 +49,7 @@ public class Payment implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "TOTALPRICE")
-    private long totalprice;
+    private double totalprice;
     @JoinColumn(name = "ORDERID", referencedColumnName = "ORDERID")
     @OneToOne(optional = false)
     private Orders orderid;
@@ -61,7 +61,7 @@ public class Payment implements Serializable {
         this.paymentid = paymentid;
     }
 
-    public Payment(Long paymentid, String method, long totalprice) {
+    public Payment(Long paymentid, String method, double totalprice) {
         this.paymentid = paymentid;
         this.method = method;
         this.totalprice = totalprice;
@@ -83,11 +83,11 @@ public class Payment implements Serializable {
         this.method = method;
     }
 
-    public long getTotalprice() {
+    public double getTotalprice() {
         return totalprice;
     }
 
-    public void setTotalprice(long totalprice) {
+    public void setTotalprice(double totalprice) {
         this.totalprice = totalprice;
     }
 
@@ -121,7 +121,7 @@ public class Payment implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Payment[ paymentid=" + paymentid + " ]";
+        return "jpa.model.Payment[ paymentid=" + paymentid + " ]";
     }
     
 }

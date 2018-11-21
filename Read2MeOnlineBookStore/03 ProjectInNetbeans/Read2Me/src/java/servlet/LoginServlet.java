@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
             for(Customer c:customer){
                 if(c.getEmail().equals(email) && passwordEncrypt.equals(c.getPassword())){
                     request.getSession().setAttribute("user", customer);
-                    getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+                    getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                     return;
                 }
             }

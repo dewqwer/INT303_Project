@@ -14,6 +14,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <form action="Checkout" method="post">
+            
         <div class="container">
             <jsp:include page="include/Header.jsp?title=Product Listing::"/>
             <table id="example" class="table">
@@ -33,8 +35,8 @@
                         <td>${lineNumber.count}</td>
                         <td>${line.book.title}</td>
                         <td>${line.quantity}</td>
-                        <td>${line.book.unitpriceperone}</td>
-                        <td style="text-align:right"><fmt:formatNumber value="${line.totalpricelineitem}" pattern="#,###.00 " /></td>
+                        <td><fmt:formatNumber value="${line.book.unitprice}" pattern="#,###.00 " /></td>
+                        <td style="text-align:right"><fmt:formatNumber value="${line.totalPrice}" pattern="#,###.00 " /></td>
                     </tr>
                 </c:forEach>
                 <tr>
@@ -45,6 +47,8 @@
                 </tr>
             </table>
         </div>
+                <input type="submit" value="Checkout">
+        </form>
 
     </body>
 </html>

@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dew2018/Desktop/60130500120/B.Sc.IT%202/INT303/ByMySelf/01%20INT303%20project/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/web/include/Header.jsp</file>
-            <file>file:/C:/Users/Dew2018/Desktop/60130500120/B.Sc.IT%202/INT303/ByMySelf/01%20INT303%20project/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/src/java/jpa/model/Lineitem.java</file>
-            <file>file:/C:/Users/Dew2018/Desktop/60130500120/B.Sc.IT%202/INT303/ByMySelf/01%20INT303%20project/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/src/java/jpa/model/Book.java</file>
-            <file>file:/C:/Users/Dew2018/Desktop/60130500120/B.Sc.IT%202/INT303/ByMySelf/01%20INT303%20project/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/src/java/model/ShoppingCart.java</file>
-            <file>file:/C:/Users/Dew2018/Desktop/60130500120/B.Sc.IT%202/INT303/ByMySelf/01%20INT303%20project/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/web/showCart.jsp</file>
+            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/src/java/servlet/CheckoutServlet.java</file>
+            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/web/index.jsp</file>
+            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/src/java/jpa/model/Lineitem.java</file>
+            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/web/showCart.jsp</file>
+            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/Read2MeOnlineBookStore/03%20ProjectInNetbeans/Read2Me/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>

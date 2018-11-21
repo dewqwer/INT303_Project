@@ -5,9 +5,6 @@
  */
 package jpa.controller;
 
-import jpa.controller.exceptions.IllegalOrphanException;
-import jpa.controller.exceptions.NonexistentEntityException;
-import jpa.controller.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -20,6 +17,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import jpa.controller.exceptions.IllegalOrphanException;
+import jpa.controller.exceptions.NonexistentEntityException;
+import jpa.controller.exceptions.RollbackFailureException;
 import jpa.model.Shipping;
 
 /**

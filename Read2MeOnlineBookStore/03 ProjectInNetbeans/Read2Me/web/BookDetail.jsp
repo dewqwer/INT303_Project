@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td>Author: </td>
-                <td>$${books.author}</td>
+                <td>${books.author}</td>
             </tr>
             <tr>
                 <td>Publisher: </td>
@@ -35,7 +35,7 @@
             </tr>
             <tr>
                 <td>Price: </td>
-                <td>${books.unitpriceperone}</td>
+                <td>${books.unitprice}</td>
             </tr>
             <tr>
                 <td>Description: </td>

@@ -212,7 +212,7 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Address[ addressid=" + addressid + " ]";
+        return "jpa.model.Address[ addressid=" + addressid + " ]";
     }
     
 }

@@ -41,13 +41,13 @@ public class BookDetailServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String isnb = request.getParameter("isnb");
+        String isbn = request.getParameter("isbn");
         
-        if(isnb == null){
+        if(isbn == null){
           response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
         } else {
             BookJpaController bookJpaCtrl = new BookJpaController(utx, emf);
-            Book books = bookJpaCtrl.findBook(Long.valueOf(isnb));
+            Book books = bookJpaCtrl.findBook(isbn);
 //            System.out.println("product code"+product.getProductcode());
 //            System.out.println("product description"+product.getProductdescription());
             request.setAttribute("books", books);

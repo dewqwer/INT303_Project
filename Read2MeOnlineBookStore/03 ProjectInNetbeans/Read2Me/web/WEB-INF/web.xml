@@ -8,9 +8,19 @@
         <filter-name>ConvertToThaiLanguageFilter</filter-name>
         <filter-class>filter.ConvertToThaiLanguageFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>ShowSpecialBookFilter</filter-name>
+        <filter-class>filter.ShowSpecialBookFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>ConvertToThaiLanguageFilter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <servlet-name>CheckoutServlet</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -39,8 +49,8 @@
         <servlet-class>servlet.OrdersDetailsServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PaymentServlet</servlet-name>
-        <servlet-class>servlet.PaymentServlet</servlet-class>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>servlet.CheckoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddItemToCartServlet</servlet-name>
@@ -49,6 +59,10 @@
     <servlet>
         <servlet-name>ShowCartServlet</servlet-name>
         <servlet-class>servlet.ShowCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddressServlet</servlet-name>
+        <servlet-class>servlet.AddressServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -75,16 +89,20 @@
         <url-pattern>/OrdersDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PaymentServlet</servlet-name>
-        <url-pattern>/Payment</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AddItemToCartServlet</servlet-name>
         <url-pattern>/AddItemToCart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ShowCartServlet</servlet-name>
         <url-pattern>/ShowCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/Checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddressServlet</servlet-name>
+        <url-pattern>/Address</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,10 +5,13 @@
 --%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-1">
-            <a href="index.html" title="Back to Home"><img src="images/header/logo.jpg" width="80"/></a>
+            <a href="index.jsp" title="Back to Home"><img src="images/header/logo.jpg" width="80"/></a>
         </div>
         <div class="col-sm-3">
             <h4> <br>${param.title}</h4>
@@ -25,7 +28,7 @@
                     Hello <a href="Logout">${sessionScope.user.firstname},</a>
                 </c:when>
                 <c:otherwise>
-                    Hello <a href="Login">Guest</a>
+                    Hello <a href="Login?returnUrl=${requestScope['javax.servlet.forward.request_uri']}?${requestScope['javax.servlet.forward.query_string']}">Guest</a>
                 </c:otherwise>
             </c:choose>
         </div>

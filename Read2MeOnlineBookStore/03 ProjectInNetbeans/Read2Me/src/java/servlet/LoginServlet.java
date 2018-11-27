@@ -45,22 +45,33 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String returnUrl = request.getParameter("returnUrl");
         if (email != null && email.length() > 0
                 && password != null && password.length() > 0) {
             String passwordEncrypt = cryptWithMD5(password);
             CustomerJpaController customerJpaCtrl = new CustomerJpaController(utx, emf);
             List<Customer> customer = customerJpaCtrl.findCustomerEntities();
-            for(Customer c:customer){
-                if(c.getEmail().equals(email) && passwordEncrypt.equals(c.getPassword())){
+            for (Customer c : customer) {
+                if (c.getEmail().equals(email) && passwordEncrypt.equals(c.getPassword())) {
                     request.getSession().setAttribute("user", c);
-                    getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-                    return;
+
+                    if (returnUrl != null) {
+                        response.sendRedirect(returnUrl);
+                        return;
+                    } 
+                    else{
+                        System.out.println("What path >>"+ returnUrl);
+                        response.sendRedirect(returnUrl);
+                        return;
+                    }
                 }
             }
+            
             request.setAttribute("message", "Invalid user name or password!!!");
-        } 
-            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        }
+        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
     }
+
     public static String cryptWithMD5(String pass) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

@@ -8,7 +8,7 @@ import jpa.model.Address;
 import jpa.model.Orders;
 import jpa.model.Productreview;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-23T11:28:28")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-27T17:29:03")
 @StaticMetamodel(Customer.class)
 public class Customer_ { 
 

@@ -53,10 +53,6 @@
         <servlet-class>servlet.ShowCartServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ConfirmMyOrderServlet</servlet-name>
-        <servlet-class>servlet.ConfirmMyOrderServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PaymentServlet</servlet-name>
         <servlet-class>servlet.PaymentServlet</servlet-class>
     </servlet>
@@ -103,10 +99,6 @@
     <servlet-mapping>
         <servlet-name>CheckoutServlet</servlet-name>
         <url-pattern>/Checkout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ConfirmMyOrderServlet</servlet-name>
-        <url-pattern>/ConfirmMyOrder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PaymentServlet</servlet-name>

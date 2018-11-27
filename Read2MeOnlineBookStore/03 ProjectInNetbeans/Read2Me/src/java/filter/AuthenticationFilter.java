@@ -17,6 +17,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -24,33 +25,29 @@ import javax.servlet.http.HttpSession;
  * @author Dew2018
  */
 public class AuthenticationFilter implements Filter {
-    
+
     private FilterConfig filterConfig = null;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        this.filterConfig=filterConfig;
+        this.filterConfig = filterConfig;
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpSession session=((HttpServletRequest)request).getSession(false);
-        if(session==null||session.getAttribute("user")==null){
-            filterConfig.getServletContext().getRequestDispatcher("/Login").forward(request, response);
-        }
-        else{
+
+        HttpSession session = ((HttpServletRequest) request).getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+
+            ((HttpServletResponse) response).sendRedirect(filterConfig.getServletContext().getContextPath() + "/Login?returnUrl=" + ((HttpServletRequest) request).getRequestURI());
+        } else {
             chain.doFilter(request, response);
         }
-
-
     }
 
     @Override
     public void destroy() {
 
-
-
     }
-    
-    
+
 }

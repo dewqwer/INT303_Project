@@ -51,6 +51,7 @@ public class CheckoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        
 //รายการสินค้า
         getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
     

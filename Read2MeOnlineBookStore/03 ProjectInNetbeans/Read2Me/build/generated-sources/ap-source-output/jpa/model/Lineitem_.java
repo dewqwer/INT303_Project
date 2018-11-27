@@ -7,7 +7,7 @@ import jpa.model.Book;
 import jpa.model.LineitemPK;
 import jpa.model.Orders;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-23T11:28:28")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-27T17:29:03")
 @StaticMetamodel(Lineitem.class)
 public class Lineitem_ { 
 

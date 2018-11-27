@@ -28,7 +28,7 @@
                 </tr>
                 <p>${errorMassage}</p>
                 <tr>
-                    <td><input type="submit" name="Login"/></td>
+                    <td><input type="submit" value="Login"></td>
                 </tr>
             </table>
         </form>

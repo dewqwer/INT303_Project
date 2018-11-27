@@ -21,10 +21,5 @@
                 <a href="OrdersDetails">OrdersDetails</a>
                 <a href="Checkout">Checkout</a>
 
-        
-
-
-
-
     </body>
 </html>

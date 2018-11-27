@@ -2,15 +2,11 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>filter.NewFilter</filter-class>
+        <filter-class>filter.AuthenticationFilter</filter-class>
     </filter>
     <filter>
         <filter-name>ConvertToThaiLanguageFilter</filter-name>
         <filter-class>filter.ConvertToThaiLanguageFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>ShowSpecialBookFilter</filter-name>
-        <filter-class>filter.ShowSpecialBookFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>ConvertToThaiLanguageFilter</filter-name>
@@ -45,10 +41,6 @@
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>OrdersDetailsServlet</servlet-name>
-        <servlet-class>servlet.OrdersDetailsServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>CheckoutServlet</servlet-name>
         <servlet-class>servlet.CheckoutServlet</servlet-class>
     </servlet>
@@ -61,8 +53,24 @@
         <servlet-class>servlet.ShowCartServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddressServlet</servlet-name>
-        <servlet-class>servlet.AddressServlet</servlet-class>
+        <servlet-name>ConfirmMyOrderServlet</servlet-name>
+        <servlet-class>servlet.ConfirmMyOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>servlet.PaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrdersDetailsServlet</servlet-name>
+        <servlet-class>servlet.OrdersDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddressShippingServlet</servlet-name>
+        <servlet-class>servlet.AddressShippingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShippingServlet</servlet-name>
+        <servlet-class>servlet.ShippingServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -85,10 +93,6 @@
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>OrdersDetailsServlet</servlet-name>
-        <url-pattern>/OrdersDetails</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AddItemToCartServlet</servlet-name>
         <url-pattern>/AddItemToCart</url-pattern>
     </servlet-mapping>
@@ -101,8 +105,24 @@
         <url-pattern>/Checkout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddressServlet</servlet-name>
-        <url-pattern>/Address</url-pattern>
+        <servlet-name>ConfirmMyOrderServlet</servlet-name>
+        <url-pattern>/ConfirmMyOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/Payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrdersDetailsServlet</servlet-name>
+        <url-pattern>/OrdersDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddressShippingServlet</servlet-name>
+        <url-pattern>/AddressShipping</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShippingServlet</servlet-name>
+        <url-pattern>/Shipping</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

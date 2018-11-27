@@ -63,7 +63,6 @@ public class RegisterServlet extends HttpServlet {
 
             Customer customer = new Customer();
             customer.setEmail(email);
-
             customer.setFirstname(firstName);
             customer.setLastname(lastName);
             customer.setPassword(passwordEncrypt);
@@ -85,7 +84,7 @@ public class RegisterServlet extends HttpServlet {
             }
 
             customerJpaController.create(customer);
-            getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             return;
 
         }

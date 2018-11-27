@@ -12,15 +12,20 @@ import javax.annotation.Resource;
 import javax.persistence.Entity;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.criteria.Order;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import jpa.controller.AddressJpaController;
 import jpa.controller.CustomerJpaController;
 import jpa.model.Address;
 import jpa.model.Customer;
+import jpa.model.Lineitem;
+import jpa.model.Orders;
+import model.ShoppingCart;
 import static servlet.RegisterServlet.cryptWithMD5;
 
 /**
@@ -46,45 +51,9 @@ public class CheckoutServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-
-
-//ที่อยู่จัดส่งสินค้า
-        String addressNo = request.getParameter("addressNo");
-        String street = request.getParameter("street");
-        String alley = request.getParameter("alley");
-        String subdistrict = request.getParameter("subdistrict");
-        String district = request.getParameter("district");
-        String province = request.getParameter("province");
-        String postcode = request.getParameter("postcode");
+//รายการสินค้า
+        getServletContext().getRequestDispatcher("/checkout.jsp").forward(request, response);
     
-            if (addressNo != null && addressNo.trim().length() > 0
-                && street != null && street.trim().length() > 0
-                && alley != null && alley.trim().length() > 0
-                && subdistrict != null && subdistrict.trim().length() > 0
-                && district != null && district.trim().length() > 0
-                && province != null && province.trim().length() > 0
-                && postcode != null && postcode.trim().length() > 0) {
-
-            Address address = new Address();
-            address.setAddressno(addressNo);
-            address.setAlley(alley);
-            address.setDistrict(district);
-            address.setPostcode(postcode);
-            address.setProvince(province);
-            address.setStreet(street);
-            address.setSubdistrict(subdistrict);
-            address.setCustomerid(customer);
-
-            AddressJpaController addressJpaController = new AddressJpaController(utx, emf);
-            addressJpaController.create(address);
-            getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-            return;
-
-        }
-
-        System.out.println("Error");
-        getServletContext().getRequestDispatcher("/register.jsp").forward(request, response);
 
     }
 

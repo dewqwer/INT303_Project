@@ -22,7 +22,7 @@
             <br><br>
             <c:choose>
                 <c:when test="${sessionScope.user != null}">
-                    Hello <a href="Logout">${sessionScope.user.contactfirstname},</a>
+                    Hello <a href="Logout">${sessionScope.user.firstname},</a>
                 </c:when>
                 <c:otherwise>
                     Hello <a href="Login">Guest</a>

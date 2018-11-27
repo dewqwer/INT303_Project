@@ -25,23 +25,7 @@
             <br>
             Phone :<input type="tel" name="phone" required>
             <br>
-
-            Address:
-            <br>
-            Address No: <input type="text" name="addressNo" required>
-            <br>
-            Street: <input type="text" name="street" required>
-            <br>
-            Alley (ซอย): <input type="text" name="alley" required>
-            <br>
-            Subdistrict: <input type="text" name="subdistrict" required>
-            <br>
-            District: <input type="text" name="district" required>
-            <br>
-            Province: <input type="text" name="province" required>
-            <br>
-            Postcode: <input type="text" name="postcode" required>
-            <br>
+           
             <input type="submit" value="Confirm">
         </form>
     </body>

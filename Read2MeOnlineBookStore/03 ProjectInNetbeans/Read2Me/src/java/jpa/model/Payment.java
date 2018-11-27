@@ -6,6 +6,7 @@
 package jpa.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -84,7 +85,12 @@ public class Payment implements Serializable {
     }
 
     public double getTotalprice() {
-        return totalprice;
+        double sum=0;
+        Collection<Lineitem> lineItems = this.orderid.getLineitemList();
+        for(Lineitem lineItem:lineItems){
+            sum+=lineItem.getTotalPrice();
+        }
+        return sum+this.orderid.getShipping().getShippingcost();
     }
 
     public void setTotalprice(double totalprice) {

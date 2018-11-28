@@ -18,7 +18,7 @@
     </head>
     <body>
         <form action="Login" method="post">
-
+            <input type="hidden" name="returnUrl" value="${returnUrl}">
             <div class="container">
                 <table class="table">
                     <tr>

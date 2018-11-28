@@ -46,6 +46,11 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String returnUrl = request.getParameter("returnUrl");
+        
+        if(returnUrl!=null){
+            request.setAttribute("returnUrl", returnUrl);
+        }
+        
         if (email != null && email.length() > 0
                 && password != null && password.length() > 0) {
             String passwordEncrypt = cryptWithMD5(password);
@@ -60,7 +65,6 @@ public class LoginServlet extends HttpServlet {
                         return;
                     } 
                     else{
-                        System.out.println("What path >>"+ returnUrl);
                         response.sendRedirect(returnUrl);
                         return;
                     }

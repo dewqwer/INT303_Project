@@ -42,6 +42,13 @@ public class BookListServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String returnUrl = request.getParameter("returnUrl");
+        System.out.println("BookListServlet >> returnUrl: "+returnUrl);
+        
+        if(returnUrl!=null){
+            request.setAttribute("returnUrl", returnUrl);
+        }                
+
         BookJpaController bookJpaCtrl = new BookJpaController(utx, emf);
         List<Book> books = bookJpaCtrl.findBookEntities();
         request.setAttribute("books", books);

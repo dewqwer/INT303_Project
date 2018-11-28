@@ -28,7 +28,7 @@
                 <th>Author</th>
                 <th>Price</th>
                 <th>Add</th>
-                <th>Remove</th>
+                <th>View</th>
                 </thead>
                 <c:forEach items="${books}" var="b" varStatus="vs">
                     <tr>
@@ -40,12 +40,16 @@
                         
                         <td>
                             <a href="AddItemToCart?isbn=${b.isbn}">
+                                <input type="hidden" name="returnUrl" value="${returnUrl}">
+                                <input type="hidden" name="isbn" value="${b.isbn}">
                                 <input type="button" value="Add to cart"/>
                             </a>
                         </td>
                         <td>
-                            <a href="RemoveToCart?isbn=${b.isbn}">
-                                <input type="button" value="Remove to cart"/>
+                            <a href="BookDetail?isbn=${b.isbn}">
+                                <input type="hidden" name="returnUrl" value="${returnUrl}">
+                                <input type="hidden" name="isbn" value="${b.isbn}">
+                                <input type="button" value="View"/>
                             </a>
                         </td>
                     </tr>

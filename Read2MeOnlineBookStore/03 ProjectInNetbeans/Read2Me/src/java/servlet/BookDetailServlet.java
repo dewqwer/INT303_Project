@@ -8,6 +8,7 @@ package servlet;
 import jpa.controller.BookJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -16,15 +17,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
+import jpa.controller.ProductreviewJpaController;
 import jpa.model.Book;
+import jpa.model.Productreview;
 
 /**
  *
  * @author User
  */
 public class BookDetailServlet extends HttpServlet {
-
-    
    @PersistenceUnit (unitName = "Read2MeNovel")
    EntityManagerFactory emf;
    
@@ -42,16 +43,34 @@ public class BookDetailServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String isbn = request.getParameter("isbn");
+        String returnUrl = request.getParameter("returnUrl");
+        System.out.println("BookDetailServlet >> returnUrl: "+returnUrl);
+        
+        if(returnUrl!=null){
+            request.setAttribute("returnUrl", returnUrl);
+        }                
+        
+
+        System.out.println("BookDetailServlet >> isbn: "+isbn);
+        
         
         if(isbn == null){
           response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
         } else {
             BookJpaController bookJpaCtrl = new BookJpaController(utx, emf);
             Book books = bookJpaCtrl.findBook(isbn);
-//            System.out.println("product code"+product.getProductcode());
-//            System.out.println("product description"+product.getProductdescription());
             request.setAttribute("books", books);
-            getServletContext().getRequestDispatcher("/bookDetail.jsp").forward(request, response);
+            
+            ProductreviewJpaController productreviewJpaController=new ProductreviewJpaController(utx, emf);
+            List<Productreview> productReviewList = productreviewJpaController.findProductreviewEntities();
+            request.setAttribute("productReviewList", productReviewList);
+            
+            System.out.println("BookDetailServlet >> books.getIsbn(): "+books.getIsbn());
+            System.out.println("BookDetailServlet >> productreViewList: "+productReviewList);
+            
+            response.sendRedirect(returnUrl);
+            
+//            getServletContext().getRequestDispatcher("/bookDetail.jsp").forward(request, response);
         }
     }
 

@@ -17,6 +17,7 @@
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
         <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-name>ProductReviewServlet</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -68,6 +69,10 @@
         <servlet-name>ShippingServlet</servlet-name>
         <servlet-class>servlet.ShippingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductReviewServlet</servlet-name>
+        <servlet-class>servlet.ProductReviewServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/Register</url-pattern>
@@ -115,6 +120,10 @@
     <servlet-mapping>
         <servlet-name>ShippingServlet</servlet-name>
         <url-pattern>/Shipping</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductReviewServlet</servlet-name>
+        <url-pattern>/ProductReview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

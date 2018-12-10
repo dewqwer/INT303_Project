@@ -22,7 +22,7 @@
             <p><b>หมวดหมู่:</b> ${book.category}</p>
             <p><b>ISBN:</b> ${book.isbn}</p>
             <p><b>ราคา: ${book.unitprice}</b></p>
-            <form action = "AddToCart">
+            <form action = "AddToCart?returnUrl=${urlBookDetail}?${requestScope['javax.servlet.forward.query_string']}" method="post">
                 <input type = "hidden" name = "isbn" value = "${book.isbn}">
                 <input type = "submit" class="btn btn-secondary" value = "Add To Cart">
             </form>

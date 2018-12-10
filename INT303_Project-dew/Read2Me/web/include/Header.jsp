@@ -57,7 +57,6 @@
             </c:when>
             <c:otherwise>
                 <span style="color: whitesmoke">Hello Guest</span><br>
-                <!--<a href = "Login?returnUrl=${requestScope['javax.servlet.forward.request_url']}?${requestScope['javax.servlet.forward.query_string']}" style="color: whitesmoke">Login</a> |-->
                 <a href = "Login?returnUrl=${urlBookList}?${requestScope['javax.servlet.forward.query_string']}" style="color: whitesmoke">Login</a> |
                 <a href = "Register" style="color: whitesmoke">Register</a>
             </c:otherwise>

@@ -39,7 +39,7 @@
                             <span class = "bookInfo">${book.author}</span> 
                             <span class = "bookInfo">${book.unitprice}</span> 
                             <span class = "bookInfo">
-                                <form action = "AddToCart" method = "post">
+                                <form action = "AddToCart?returnUrl=${requestScope['javax.servlet.forward.request_uri']}?${requestScope['javax.servlet.forward.query_string']}" method = "post">
                                     <input type = "hidden" name = "isbn" value = "${book.isbn}">
                                     <input type = "submit" class="btn btn-secondary" value = "Add To Cart">
                                 </form>

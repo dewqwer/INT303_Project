@@ -41,6 +41,8 @@ public class BookDetailServlet extends HttpServlet {
             
             if(book != null){
                 request.setAttribute("book", book);
+                String urlBookDetail = request.getRequestURI();
+                request.setAttribute("urlBookDetail", urlBookDetail);
                 getServletContext().getRequestDispatcher("/product/BookDetail.jsp").forward(request, response);
             }
         }

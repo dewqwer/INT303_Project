@@ -25,18 +25,24 @@ public class AddToCartServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String isbn = request.getParameter("isbn");
+        String returnUrl = request.getParameter("returnUrl");
+
+        if (returnUrl != null) {
+            request.setAttribute("returnUrl", returnUrl);
+        }
+
         HttpSession session = request.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        
+
         if (cart == null) {
             cart = new ShoppingCart();
-            
+
             // เพื่อเก็บรายการสินค้าในตะกร้าจนกว่า user จะทำการ logout
             Cookie[] cookies = request.getCookies();
             for (Cookie ck : cookies) {
-                ck.setMaxAge(60*60);
+                ck.setMaxAge(60 * 60);
                 response.addCookie(ck);
             }
         }
@@ -45,7 +51,11 @@ public class AddToCartServlet extends HttpServlet {
         Book b = bookJpaController.findBook(isbn);
         cart.add(b);
         session.setAttribute("cart", cart);
-        response.sendRedirect("/Read2Me");
+        if (returnUrl != null) {
+            response.sendRedirect(returnUrl);
+        }else{
+            response.sendRedirect(returnUrl);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

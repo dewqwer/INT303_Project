@@ -1,30 +1,39 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlet.product;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.persistence.Entity;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import jpa.controller.BookJpaController;
 import jpa.controller.ReviewJpaController;
-import jpa.controller.exceptions.NonexistentEntityException;
-import jpa.controller.exceptions.RollbackFailureException;
 import jpa.model.Book;
+import jpa.model.Customer;
 import jpa.model.Review;
 
-public class BookDetailServlet extends HttpServlet {
-
+/**
+ *
+ * @author Dew2018
+ */
+public class ReviewServlet extends HttpServlet {
     @PersistenceUnit(unitName = "Read2MePU")
     EntityManagerFactory emf;
-
+    
     @Resource
     UserTransaction utx;
 
@@ -38,39 +47,41 @@ public class BookDetailServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, NonexistentEntityException, RollbackFailureException, Exception {
-
-        String isbn = request.getParameter("isbn");
-
-        if (isbn != null && isbn.trim().length() > 0) {
-            BookJpaController bookJpaCtrl = new BookJpaController(utx, emf);
-            Book book = bookJpaCtrl.findBook(isbn);
-
-            if (book != null) {
-                request.setAttribute("book", book);
-                String urlBookDetail = request.getRequestURI();
-                request.setAttribute("urlBookDetail", urlBookDetail);
-
-                ReviewJpaController reviewJpaController = new ReviewJpaController(utx, emf);
-                List<Review> findReviews = reviewJpaController.findReviewEntities();
-                List<Review> reviewOfThisBook = new ArrayList<>();
-
-                if (findReviews != null) {
-                    for (Review r : findReviews) {
-                        if (r.getIsbn().getIsbn().equals(isbn)) {
-                            reviewOfThisBook.add(r);
-                        }
-                    }
-                    book.setReviewList(reviewOfThisBook);
-                    request.setAttribute("reviewOfThisBook", reviewOfThisBook);
-
-                    bookJpaCtrl.edit(book);
-                }
-
-                getServletContext().getRequestDispatcher("/product/BookDetail.jsp").forward(request, response);
-            }
+            throws ServletException, IOException, Exception {
+        String returnUrl=request.getParameter("returnUrl");
+        String comment=request.getParameter("comment");
+        String ratingStr=request.getParameter("rating");
+        String isbn=request.getParameter("isbn");
+        
+        HttpSession session=request.getSession(false);
+        session.getAttribute("user");
+        
+        if(returnUrl!=null){
+            request.setAttribute("returnUrl", returnUrl);
         }
-
+        
+        if(ratingStr==null){
+            request.getServletContext().getRequestDispatcher("/product/BookDetail.jsp").forward(request, response);
+        }
+        
+        else{
+            Customer customer=(Customer) session.getAttribute("user");
+            int rating = Integer.valueOf(ratingStr);
+            
+            BookJpaController bookJpaController = new BookJpaController(utx, emf);
+            Book b = bookJpaController.findBook(isbn);
+            
+            Review review=new Review(rating);
+            review.setComment(comment);
+            review.setIsbn(b);
+            review.setCustomerid(customer);
+        
+            ReviewJpaController reviewJpaController=new ReviewJpaController(utx, emf);
+            reviewJpaController.create(review);
+            
+            response.sendRedirect(returnUrl);
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,10 +98,8 @@ public class BookDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (RollbackFailureException ex) {
-            Logger.getLogger(BookDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(BookDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReviewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -107,10 +116,8 @@ public class BookDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (RollbackFailureException ex) {
-            Logger.getLogger(BookDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(BookDetailServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReviewServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

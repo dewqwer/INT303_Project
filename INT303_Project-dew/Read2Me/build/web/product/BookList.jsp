@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -37,7 +38,7 @@
                             </span>
                             <span class = "bookInfo">${book.title}</span>
                             <span class = "bookInfo">${book.author}</span> 
-                            <span class = "bookInfo">${book.unitprice}</span> 
+                            <span class = "bookInfo"><fmt:formatNumber type = "number" value="${book.unitprice}" pattern = ".00"></fmt:formatNumber></span> 
                             <span class = "bookInfo">
                                 <form action = "AddToCart?returnUrl=${requestScope['javax.servlet.forward.request_uri']}?${requestScope['javax.servlet.forward.query_string']}" method = "post">
                                     <input type = "hidden" name = "isbn" value = "${book.isbn}">

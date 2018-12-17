@@ -9,8 +9,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-         <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.css">
-       
+        <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.css">
+        <link rel="stylesheet" href="https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css">
+
         <title>Shopping Cart</title>
     </head>
     <body>
@@ -30,7 +32,7 @@
                             <td>
                                 <a href = "BookDetail?isbn=${line.book.isbn}">
                                     <img src = "images/novel/${line.book.isbn}.jpg" width = "360px" height = "500px">
-                                </a>
+                                </a>&nbsp;&nbsp;
                                 ${line.book.title}
                             </td>
                             <td>
@@ -40,7 +42,7 @@
                                     <input type = "submit" class="btn btn-secondary" value = "Edit" style="margin-left:10px ">
                                 </form>
                             </td>
-                            <td>${line.book.unitprice}</td>
+                            <td><fmt:formatNumber value="${line.book.unitprice}" pattern="#,###.00 " /></td>
                             <td><fmt:formatNumber value="${line.totalLinePrice}" pattern="#,###.00 " /></td>
                             <td>
                                 <form action = "RemoveFromCart" method = "post">
@@ -50,14 +52,16 @@
                             </td>
                         </tr>
                     </c:forEach>
-                    <tr>
+                    <tr class="total">
                         <td>Total</td>                     
                         <td>${cart.totalQuantity}</td>
                         <td></td>
                         <td><fmt:formatNumber value="${cart.totalPrice}" pattern="#,###.00 " /></td>
                     </tr>
                 </table>
-                <a href = "Checkout" style = "border: black solid medium; width: 10%; padding: 10px; margin: 0 auto; display: block;text-align: center; color: cornflowerblue">Checkout</a>
+                    <div class="checkoutBtn" style="text-align: center;">
+                    <a href = "Checkout" class=" btn btn-primary btn-lg btn-info" style = "padding: 15px;">Checkout</a>
+                </div>
             </c:when>
             <c:otherwise>
                 <div>
@@ -72,7 +76,16 @@
             }
             th, td{
                 margin-right: 20px;
-                padding: 20px
+                padding: 20px;
+                /*background-color: #f1ead7;*/
+            }
+            th{
+                background-color: #f1ead7;
+            }
+            tr.total{
+                background-color: #cfbeb7;
+                color: #ffffff;
+                font-weight: bolder;
             }
         </style>
         <jsp:include page = "../include/Footer.jsp"/>

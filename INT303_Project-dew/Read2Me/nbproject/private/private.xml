@@ -3,11 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/INT303_Project-dew/Read2Me/src/java/servlet/account/LoginServlet.java</file>
-            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/INT303_Project-dew/Read2Me/web/include/Header.jsp</file>
-            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/INT303_Project-dew/Read2Me/web/product/BookDetail.jsp</file>
-            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/INT303_Project-dew/Read2Me/src/java/servlet/product/ReviewServlet.java</file>
-            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/INT303_Project-dew/Read2Me/src/java/servlet/product/BookDetailServlet.java</file>
+            <file>file:/C:/Users/Dew2018/Documents/ProjectToGitHub/INT303_Project-dew/Read2Me/web/cart/ViewCart.jsp</file>
         </group>
     </open-files>
 </project-private>

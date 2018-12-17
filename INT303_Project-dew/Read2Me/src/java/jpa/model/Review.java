@@ -1,7 +1,9 @@
-
 package jpa.model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,6 +49,8 @@ public class Review implements Serializable {
     @ManyToOne(optional = false)
     private Customer customerid;
 
+    private Map<String, Review> allRating;
+
     public Review() {
     }
 
@@ -90,6 +94,7 @@ public class Review implements Serializable {
         this.customerid = customerid;
     }
 
+   
     @Override
     public int hashCode() {
         int hash = 0;
@@ -114,5 +119,5 @@ public class Review implements Serializable {
     public String toString() {
         return "jpa.model.Review[ reviewid=" + reviewid + " ]";
     }
-    
+
 }

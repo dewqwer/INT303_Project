@@ -48,6 +48,7 @@ public class BookDetailServlet extends HttpServlet {
 
             if (book != null) {
                 request.setAttribute("book", book);
+                
                 String urlBookDetail = request.getRequestURI();
                 request.setAttribute("urlBookDetail", urlBookDetail);
 
@@ -63,7 +64,6 @@ public class BookDetailServlet extends HttpServlet {
                     }
                     book.setReviewList(reviewOfThisBook);
                     request.setAttribute("reviewOfThisBook", reviewOfThisBook);
-
                     bookJpaCtrl.edit(book);
                 }
 

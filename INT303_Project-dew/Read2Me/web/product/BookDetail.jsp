@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -22,13 +23,13 @@
             <p><b>สำนักพิมพ์:</b> ${book.publisher}</p>
             <p><b>หมวดหมู่:</b> ${book.category}</p>
             <p><b>ISBN:</b> ${book.isbn}</p>
-            <p><b>ราคา: ${book.unitprice}</b></p>
+            <p><b>ราคา: <fmt:formatNumber type = "number" value="${book.unitprice}" pattern = ".00"></fmt:formatNumber></b></p>
             <form action = "AddToCart?returnUrl=${urlBookDetail}?${requestScope['javax.servlet.forward.query_string']}" method="post">
                 <input type = "hidden" name = "isbn" value = "${book.isbn}">
                 <input type = "submit" class="btn btn-secondary" value = "Add To Cart">
             </form>
         </div>
-
+                
         <div class="sendMyReview">
             <c:if test="${sessionScope.user == null}">
                 <form action="Login?returnUrl=${urlBookDetail}?${requestScope['javax.servlet.forward.query_string']}" method="post">
@@ -72,7 +73,7 @@
                     <p><b>Reviewid:</b><span class="review">${reviewOfThisBook.reviewid}</span>
                     <span class="review">${reviewOfThisBook.comment}</span>
                     <p><b>Rating:</b> <span class="review">${reviewOfThisBook.rating}</span>
-                    <p><b>Customerid:</b> <span class="review">${sessionScope.user.customerid}</span>
+                    <p><b>Customerid:</b> <span class="review">${reviewOfThisBook.customerid.customerid}</span>
                 </div>
             </c:forEach>
         </div>

@@ -9,6 +9,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.css">
         <title>Checkout</title>
     </head>
     <body>
@@ -25,12 +27,15 @@
                     <tr>
                         <td class = "firstCol">
                             <span class = "bookInfo"><img src = "images/novel/${item.book.isbn}.jpg" width = "180px" height = "250px"></span>
+                            <br>
                             <span class = "bookInfo">${item.book.title}</span>
+                            <br>
                         </td>
-                        <td class = "secondCol">${item.book.unitprice}</td>
+                        <td class = "secondCol"><fmt:formatNumber value="${item.book.unitprice}" pattern="#,###.00 " /></td>
                     </tr>
+                    <br>
                 </c:forEach>
-                <tr>
+                <tr class="shippingCost">
                     <td class = "firstCol">Delivery</td>
                     <td class = "secondCol">
                         <c:choose>
@@ -45,19 +50,21 @@
                         </c:choose>
                     </td>
                 </tr>
-                <tr>
+                <tr class="total">
                     <td class = "firstCol">Total</td>
                     <td class = "secondCol">
-                        ${cart.totalPrice + shippingCost}
+                        <fmt:formatNumber value="${cart.totalPrice + shippingCost}" pattern="#,###.00 " />
                     </td>
                 </tr>
             </table>
         </div>
 
         <div class = "shipping">
-            <h2>Shipping Address</h2>
-
+            <h2 style="color: #643f5a;">Shipping Address</h2>
+            <br>
             <c:set value = "${sessionScope.user.addressList}" var = "userAddress" ></c:set>
+            <c:choose>
+                <c:when test = "${empty userAddress}">
                     <form action = "AddAddress" method = "post">
 
                         <span class = "addressField">
@@ -96,24 +103,28 @@
                         </span>
 
                         <span class = "addressField">
-                            <input type = "submit" value = "Add Address">
+                            <input type = "submit" value = "Add Address" class="btn btn-info" style="margin: 20px 0 0 0;">
                         </span>
                     </form>
-                    <br>
+                </c:when>
+                <c:otherwise>
                     <form action = "Checkout" method = "post">
                         <c:forEach items = "${userAddress}" var = "address">
                             <div>
                                 <span class = "addressInfo">
-                                    <input type = "radio" name = "addressId" value = "${address.addressid}" ${address.addressid == this.value ? "checked" : ""} required/>
+                                    <input type = "radio" name = "addressId" value = "${address.addressid}" required/>
                                     ${address.addressno}, ${address.alley}, ${address.street} <br>
                                     ${address.subdistrict}, ${address.district}, ${address.province} <br>
                                     ${address.postcode}
                                 </span>
                             </div>
                         </c:forEach>
-
-
-                <h2>Payment</h2>
+                    </c:otherwise>
+                </c:choose>
+                <br>
+                <br>
+                <h2 style="color: #643f5a;">Payment</h2>
+                <br>
                 <span class = "paymentField">
                     <label>Credit Card No:</label>
                     <input type = "number" min = "1" required> &nbsp;
@@ -131,54 +142,69 @@
 
                 <input type = "hidden" name = "shippingCost" value = "${shippingCost}">
 
-                <span class = "submitButton">
-                    <input type = "submit" value = "Confirm">
+                <span class="submitButton">
+                    <input type = "submit" value = "Confirm" class=" btn btn-danger btn-lg btn-info" style = "padding: 20px">
                 </span>
             </form>
+        </div>
 
-            <style>
-                .cart{
-                    float: right;
-                    margin: 50px;
-                    width: 30%;
-                }
-                .firstCol{
-                    margin: 50px 0; 
-                    padding-right: 50px;
-                }
-                .secondCol{
-                    margin: 50px 0; 
-                    padding-left: 50px;
-                }
-                .bookInfo, .addressField{
-                    display: block;
-                }
-                .shipping, .payment{
-                    margin: 50px;
-                    width: 60%;
-                    border: black solid medium;
-                }
-                .addressField, .paymentField, .addressInfo{
-                    display: block;
-                    margin: 10px;
-                }
-                label{
-                    width: 150px;
-                }
-                .addressInfo{
-                    margin: 10px;
-                }
-                .submitButton{
-                    width: 10%; padding: 10px; 
-                    margin: 0 auto; 
-                    display: block;
-                    text-align: center
-                }
-                .expDate{
-                    width: 60px;
-                }
-            </style>
+        <style>
+            .cart{
+                float: right;
+                margin: 50px;
+                width: 30%;
+            }
+            .firstCol{
+                margin: 50px 0; 
+                padding-right: 50px;
+            }
+            .secondCol{
+                margin: 50px 0; 
+                padding-left: 50px;
+            }
+            .bookInfo, .addressField{
+                display: block;
+            }
+            .shipping, .payment{
+                margin: 50px;
+                width: 60%;
+                border-radius: 30px ;
+                padding: 30px 30px 30px;
+                background-color: #e99a9a;
+                color: #f1ead7;
 
-            <jsp:include page = "../include/Footer.jsp"/>
+            }
+            .addressField, .paymentField, .addressInfo{
+                display: block;
+                margin: 10px;
+            }
+            label{
+                width: 150px;
+            }
+            .addressInfo{
+                margin: 10px;
+            }
+            .submitButton{
+                width: 10%; padding: 10px; 
+                margin: 0 auto; 
+                display: block;
+                text-align: center;
+
+            }
+            .expDate{
+                width: 60px;
+            }
+
+            .shippingCost{
+                background-color: #f1ead7; 
+            }
+            .total{
+                background-color: #f5debc; 
+            }
+            
+            
+        </style>
+
+        <jsp:include page = "../include/Footer.jsp"/>
     </body>
 </html>

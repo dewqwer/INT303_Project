@@ -61,7 +61,7 @@
                 </table>
                     <div class="checkoutBtn" style="text-align: center;">
                     <a href = "Checkout" class=" btn btn-primary btn-lg btn-info" style = "padding: 15px;">Checkout</a>
-                </div>
+                    </div>
             </c:when>
             <c:otherwise>
                 <div>

@@ -1,7 +1,7 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -65,8 +65,7 @@
             <c:set value = "${sessionScope.user.addressList}" var = "userAddress" ></c:set>
             <c:choose>
                 <c:when test = "${empty userAddress}">
-                    <form action = "AddAddress" method = "post">
-
+                <form action = "AddAddress" method = "post">
                         <span class = "addressField">
                             <label>Address No:</label>
                             <input type="text" name="addressNo" required>
@@ -105,7 +104,7 @@
                         <span class = "addressField">
                             <input type = "submit" value = "Add Address" class="btn btn-info" style="margin: 20px 0 0 0;">
                         </span>
-                    </form>
+                </form>
                 </c:when>
                 <c:otherwise>
                     <form action = "Checkout" method = "post">
@@ -201,8 +200,8 @@
             .total{
                 background-color: #f5debc; 
             }
-            
-            
+
+
         </style>
 
         <jsp:include page = "../include/Footer.jsp"/>

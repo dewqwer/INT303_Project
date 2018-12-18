@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,19 +18,22 @@
         <c:choose>
             <c:when test = "${!empty orders}">
                 <table>
-                    <tr>
+                    <tr class="headerTable">
                         <th>Order no.</th>
                         <th>Order date</th>
                         <th>Status</th>
                         <th>Total</th>
                     </tr>
-                    <c:forEach items = "${orders}" var = "order">
-                        <tr>
+                    <c:set var="bgColorX" value="#e8e8ea"/>
+                    <c:set var="bgColorY" value="#f4f0ec"/>
+                    <c:forEach items = "${orders}" var = "order" varStatus="vs">
+                        <tr style="color:#0c0d10 ;background-color:${vs.count%2==1?bgColorX:bgColorY}">
+                            <td hidden>${vs.count}</td>
                             <td>${order.orderid}</td>
                             <td>${fn:substring(order.ordereddate, 0, 9)}</td>
                             <td>${order.ordersatus}</td>
-                            <td>${order.payment.totalprice}</td>
-                            <th><a href = "OrderDetail?orderid=${order.orderid}">> View Detail</a></th>
+                            <td><fmt:formatNumber value="${order.payment.totalprice}" pattern="#,###.00 " /></td>
+                            <th><a class="viewDetail" href = "OrderDetail?orderid=${order.orderid}">> View Detail</a></th>
                         </tr>
                     </c:forEach>
                 </table>
@@ -41,4 +45,29 @@
         </c:choose>
 
         <jsp:include page = "../include/Footer.jsp"/>
+
+        <style>
+            table{
+                background-color:#2d2e3b;
+                text-align:center;
+                margin:50px;
+                width:50%;
+                color: #c5c1bd;
+            }
+            tr{
+                width:50%;
+                height:50px;
+                
+            }
+            .viewDetail{
+               color: #0d9aa2; 
+                
+                
+            }
+
+
+
+        </style>
+
+    </body>
 </html>
